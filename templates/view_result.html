@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{url_for('static', filename='manage.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <title>SRMS</title>
+</head>
+<body>
+
+    <div class="title">
+       <img src="{{url_for('static', filename='logo1.png')}}" width="200" height="130"/>
+        <span class="heading">SRMS</span>
+        <a href="{{url_for('log_in.login')}}" style="color: white"><span class="fa fa-sign-out fa-2x">Logout</span></a>
+    </div>
+
+
+    <div class="nav">
+        <ul>
+            <li class="dropdown" onclick="toggleDisplay('1')">
+                <a href="" class="dropbtn">Classes &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="1">
+                    <a href="{{url_for('add_classes.add_class')}}">Add Class</a>
+                    <a href="{{url_for('add_classes.manage_class')}}">Manage Class</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('2')">
+                <a href="#" class="dropbtn">Students &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="2">
+                    <a href="{{url_for('add_student.add_student1')}}">Add Students</a>
+                    <a href="{{url_for('manage_student.manage_students')}}">Manage Students</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('3')">
+                <a href="#" class="dropbtn">Results &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="3">
+                    <a href="{{url_for('result.view_result')}}">Manage Results</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('4')">
+                <a href="" class="dropbtn">Subjects
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="4">
+                    <a href="{{url_for('add_subject.add_subjects')}}">Add Subject</a>
+                    <a href="{{url_for('add_subject.manage_subject')}}">Manage Subjects</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('5')">
+                <a href="#" class="dropbtn">Register
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="5">
+                    <a href="{{ url_for('reg.register') }}">Admin</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+<h3>View result</h3>
+        <h3 align="center"> Student ID = {{ row["id"] }}</h3>
+        <h3 align="center"> Student Name = {{ row["student_name"] }}</h3>
+        <h3 align="center"> Roll number =  {{ row["roll_no"] }}</h3>
+        <h3 align="center"> Student Gender = {{ row["student_gender"] }}</h3>
+        <h3 align="center"> Student Mobile = {{ row["student_mobile"] }}</h3>
+        <h3 align="center"> Student Class = {{ row["student_class_name"] }}</h3>
+<table align="center" border=5>
+    <thead>
+        <td> Subject</td>
+        <td>marks</td>
+    </thead>
+
+    {% for row in row2 %}
+        <tr>
+            <td>{{ row["subject_name"]}}</td>
+            <td>{{ row["marks"]}}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br><br>
+
+    <div class="footer">
+        <!-- <span>&copy Designed & Coded By Jibin Thomas</span> -->
+    </div>
+</body>
+</html>

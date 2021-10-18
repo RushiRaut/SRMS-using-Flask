@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='manage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <title>Edit Student</title>
+</head>
+<body>
+
+    <div class="title">
+       <img src="{{url_for('static', filename='logo1.png')}}" width="200" height="130"/>
+        <span class="heading">Dashboard</span>
+        <a href="{{url_for('log_in.login')}}" style="color: white"><span class="fa fa-sign-out fa-2x">Logout</span></a>
+    </div>
+
+
+    <div class="nav">
+        <ul>
+            <li class="dropdown" onclick="toggleDisplay('1')">
+                <a href="" class="dropbtn">Classes &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="1">
+                    <a href="{{url_for('add_classes.add_class')}}">Add Class</a>
+                    <a href="{{url_for('add_classes.manage_class')}}">Manage Class</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('2')">
+                <a href="#" class="dropbtn">Students &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="2">
+                    <a href="{{url_for('add_student.add_student1')}}">Add Students</a>
+                    <a href="{{url_for('manage_student.manage_students')}}">Manage Students</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('3')">
+                <a href="#" class="dropbtn">Results &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="3">
+                    <a href="{{url_for('result.view_result')}}">Manage Results</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('4')">
+                <a href="" class="dropbtn">Subjects
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="4">
+                    <a href="{{url_for('add_subject.add_subjects')}}">Add Subject</a>
+                    <a href="{{url_for('add_subject.manage_subject')}}">Manage Subjects</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('5')">
+                <a href="#" class="dropbtn">Register
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="5">
+                    <a href="{{ url_for('reg.register') }}">Admin</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="main">
+        <h2 class="word">
+            <form action="{{url_for('add_subject.edit_subject')}}" method="post">
+                <fieldset>
+                    <legend>Add Subject</legend>
+                    <div class="msg">{{ msg }}</div>
+                    <input type="text" name="id" value="{{ row['id'] }}" placeholder="Subject id" class="textbox">
+                     <input type="text" name="subject_name" value="{{ row['subject_name'] }}" placeholder="Subject Name" class="textbox">
+                    <input type="text" name="subject_code" value="{{ row['subject_code'] }}" placeholder="Subject Code" class="textbox">
+                    <select name="student_class_name" value="{{ row['class_name'] }}" placeholder="select class id" class="textbox">
+                        <option value="" disabled selected>Select class</option>
+                        {% for o in row1 %}
+                            <option value="{{ o.class_name }}">{{ o.class_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Submit">
+                </fieldset>
+            </form>
+        </h2>
+    </div>
+
+</div>
+    <div class="footer">
+        <!-- <span>Designed & Coded By Jibin Thomas</span> -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{url_for('static', filename='manage.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <title>Add Students</title>
+</head>
+<body>
+
+    <div class="title">
+       <img src="{{url_for('static', filename='logo1.png')}}" width="200" height="130"/>
+        <span class="heading">Dashboard</span>
+        <a href="{{url_for('log_in.login')}}" style="color: white"><span class="fa fa-sign-out fa-2x">Logout</span></a>
+    </div>
+
+    <div class="nav">
+        <ul>
+            <li class="dropdown" onclick="toggleDisplay('1')">
+                <a href="" class="dropbtn">Classes &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="1">
+                    <a href="{{url_for('add_classes.add_class')}}">Add Class</a>
+                    <a href="{{url_for('add_classes.manage_class')}}">Manage Class</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('2')">
+                <a href="#" class="dropbtn">Students &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="2">
+                    <a href="{{url_for('add_student.add_student1')}}">Add Students</a>
+                    <a href="{{url_for('manage_student.manage_students')}}">Manage Students</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('3')">
+                <a href="#" class="dropbtn">Results &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="3">
+                    <a href="{{url_for('result.view_result')}}">Manage Results</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('4')">
+                <a href="" class="dropbtn">Subjects
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="4">
+                    <a href="{{url_for('add_subject.add_subjects')}}">Add Subject</a>
+                    <a href="{{url_for('add_subject.manage_subject')}}">Manage Subjects</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('5')">
+                <a href="#" class="dropbtn">Register
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="5">
+                    <a href="{{ url_for('reg.register') }}">Admin</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <h2 class="word">
+            <form action="{{url_for('add_student.add_student1')}}" method="post">
+                <fieldset>
+                    <legend>Add Student</legend>
+                    <div class="msg">{{ msg }}</div>
+                    <input type="text" name="id" placeholder="Student id" class="textbox">
+                     <input type="text" name="student_name" placeholder="Student Name" class="textbox">
+                    <input type="text" name="roll_no" placeholder="Roll No" class="textbox">
+                    <select type="text" name="student_Gender" placeholder="Student Gender" class="textbox">
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="">Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="prefer not to say">Prefer not to say</option>
+                    </select>
+                    <input type="tel" name="student_mobile" placeholder="Student Mobile Number" class="textbox">
+                    <select name="student_class_name" placeholder="select class id" class="textbox">
+                        <option value="" disabled selected>Select class</option>
+                        {% for o in row %}
+                            <option value="{{ o.class_name }}">{{ o.class_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Submit">
+                </fieldset>
+            </form>
+        </h2>
+    </div>
+
+<div class="'main">
+<table border=5>
+    <thead>
+        <td>ID</td>
+        <td>Student Name</td>
+        <td>Roll Number</td>
+        <td>Student Gender</td>
+        <td>Student Mobile</td>
+        <td>Student Class</td>
+    </thead>
+
+    {% for row in rows %}
+        <tr>
+            <td>{{row["id"]}}</td>
+            <td>{{row["student_name"]}}</td>
+            <td>{{row["roll_no"]}}</td>
+            <td>{{row["student_gender"]}}</td>
+            <td>{{row["student_mobile"]}}</td>
+            <td>{{row["student_class_name"]}}</td>
+            <td><a href="{{url_for('delete_student.delete1',id=row['id'])}}" style="color:white;">Delete</a> <a style="color:Red;"  href="{{url_for('add_classes.pre_edit1',id=row['id'])}}" class="btn">Edit</a></td>
+        </tr>
+    {% endfor %}
+</table>
+<br><br>
+</div>
+    <div class="footer">
+        <!-- <span>&copy Designed & Coded By Jibin Thomas</span> -->
+    </div>
+</body>
+</html>

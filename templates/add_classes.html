@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./static/home.css">
+    <link rel="stylesheet" href="./static/form.css">
+     <link rel="stylesheet" type='text/css' href="./static/manage.css">
+    <link rel="stylesheet" href="static/login.css">
+    <title>Add Class</title>
+</head>
+<body>
+
+    <div class="title">
+       <img src="{{url_for('static', filename='logo1.png')}}" width="200" height="130"/>
+        <span class="heading">Dashboard</span>
+        <a href="{{url_for('log_in.login')}}" style="color: white"><span class="fa fa-sign-out fa-2x">Logout</span></a>
+    </div>
+
+    <div class="nav">
+        <ul>
+            <li class="dropdown" onclick="toggleDisplay('1')">
+                <a href="" class="dropbtn">Classes &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="1">
+                    <a href="{{url_for('add_classes.add_class')}}">Add Class</a>
+                    <a href="{{url_for('add_classes.manage_class')}}">Manage Class</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('2')">
+                <a href="#" class="dropbtn">Students &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="2">
+                    <a href="{{ url_for('add_student.add_student1') }}">Add Students</a>
+                    <a href="{{url_for('manage_student.manage_students')}}">Manage Students</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('3')">
+                <a href="#" class="dropbtn">Results &nbsp
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="3">
+                    <a href="{{url_for('result.view_result')}}">Manage Results</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('4')">
+                <a href="" class="dropbtn">Subjects
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="4">
+                    <a href="{{url_for('add_subject.add_subjects')}}">Add Subject</a>
+                    <a href="{{url_for('add_subject.manage_subject')}}">Manage Subjects</a>
+                </div>
+            </li>
+            <li class="dropdown" onclick="toggleDisplay('5')">
+                <a href="#" class="dropbtn">Register
+                    <span class="fa fa-angle-down"></span>
+                </a>
+                <div class="dropdown-content" id="5">
+                    <a href="{{ url_for('reg.register') }}">Admin</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="main">
+        <form action="" method="post">
+            <fieldset>
+                <legend>Add Class</legend>
+                <div class="msg">{{ msg }}</div>
+                <input type="text" name="class_name" placeholder="Class Name">
+                <input type="text" name="class_id" placeholder="Class ID">
+                <input type="text" name="class_name_num" placeholder="class_name_numric">
+                <input type="text" name="section" placeholder="section">
+                <input type="submit" value="Submit">
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="'main">
+<h3>Manage Classes</h3>
+<table border=5>
+    <thead>
+        <td>ID</td>
+        <td>Class Name</td>
+        <td>Class number</td>
+        <td>Section</td>
+        <td>Action</td>
+    </thead>
+
+    {% for row in rows %}
+        <tr>
+            <td>{{row["id"]}}</td>
+            <td>{{row["class_name"]}}</td>
+            <td>{{row["class_name_num"]}}</td>
+            <td>{{row["section"]}}</td>
+            <td><a href="{{url_for('add_classes.delete1',id=row['id'])}}" style="color:white;">Delete</a> <a style="color:Red;"  href="{{url_for('add_classes.pre_edit1',id=row['id'])}}" class="btn">Edit</a></td>
+        </tr>
+    {% endfor %}
+</table>
+<br><br>
+</div>
+    <div class="footer">
+        <!-- <span>Designed & Coded By Jibin Thomas</span> -->
+    </div>
+</body>
+</html>

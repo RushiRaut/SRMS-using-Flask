@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{url_for('static', filename='manage.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <title>SRMS</title>
+</head>
+<body>
+
+<h1 align="center">Result</h1>
+
+        <h3 align="center"> Student Name = {{ row["student_name"] }}</h3>
+        <h3 align="center"> Roll number =  {{ row["roll_no"] }}</h3>
+        <h3 align="center"> Class = {{ row["student_class_name"] }}</h3>
+<div class="'main">
+<table align="center" border=5>
+    <thead>
+        <td> Subject</td>
+        <td>marks</td>
+    </thead>
+
+    {% for row in row2 %}
+        <tr>
+            <td>{{ row["subject_name"]}}</td>
+            <td>{{ row["marks"]}}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br><br>
+</div>
+    <div class="footer">
+        <!-- <span>&copy Designed & Coded By Jibin Thomas</span> -->
+    </div>
+</body>
+</html>
